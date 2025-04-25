@@ -14,3 +14,5 @@
   <a href="https://linkedin.com/in/ruan-gabriel-64841033b" target="_blank"><img src="https://img.shields.io/badge/-LinkedIn-%230077B5?style=for-the-badge&logo=linkedin&logoColor=white" target="_blank"></a> 
 </div>
 
+[![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=ruangabriel12)](https://github.com/anuraghazra/github-readme-stats)
+
