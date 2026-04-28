@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação FrontEnd - Grupos da Copa</title>
+    <style>
+        /* Questão 02 - Estilização CSS */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eef2f3; /* Cor de fundo suave */
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        #container-grupos {
+            display: flex; /* Flexbox solicitado */
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            width: 100%;
+        }
+
+        .card-grupo {
+            background-color: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 12px; /* border-radius solicitado */
+            padding: 20px; /* padding solicitado */
+            width: 250px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+
+        .card-grupo:hover {
+            transform: translateY(-5px);
+        }
+
+        h2 { color: #2c3e50; border-bottom: 2px solid #3498db; }
+        h3 { color: #3498db; font-size: 1.1em; }
+        
+        ul { padding-left: 20px; color: #555; }
+        li { margin-bottom: 5px; }
+
+        details {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn-proximo {
+            margin: 20px;
+            padding: 12px 30px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .btn-proximo:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Competição Mundial 2026</h1>
+        <p>Organização de Grupos e Seleções</p>
+        <!-- Questão 03 - Botão Próximo -->
+        <button class="btn-proximo" onclick="alternarGrupos()">Próximo</button>
+    </header>
+
+    <!-- Questão 01 - Estrutura de Divs e IDs -->
+    <div id="container-grupos">
+        <!-- Grupo 1 -->
+        <div id="grupo-1" class="card-grupo">
+            <h2>Grupo A</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>México</li>
+                <li>África do Sul</li>
+                <li>Coreia do Sul</li>
+                <li>República Tcheca</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>O jogo de abertura será México x África do Sul. Confrontos entre Coreia do Sul e seleções europeias já ocorreram em várias Copas.</p>
+            </details>
+        </div>
+
+        <!-- Grupo 2 -->
+        <div id="grupo-2" class="card-grupo">
+            <h2>Grupo B</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Canadá</li>
+                <li>Suíça</li>
+                <li>Catar</li>
+                <li>Vaga Europeia (Bósnia)</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>O Canadá joga em casa, fator importante de desempenho. Catar e Suíça já se enfrentaram recentemente em amistosos.</p>
+            </details>
+        </div>
+
+        <!-- Grupo 3 -->
+        <div id="grupo-3" class="card-grupo">
+            <h2>Grupo C</h2>
+            <h3>Seleções</h3>
+            <ul>
+                <li>Brasil</li>
+                <li>Marrocos</li>
+                <li>Haiti</li>
+                <li>Escócia</li>
+            </ul>
+            <details>
+                <summary>Saiba Mais</summary>
+                <p>Brasil, Marrocos e Escócia já dividiram grupo em 1998. Brasil nunca perdeu para a Escócia em Copas.</p>
+            </details>
+        </div>
+    </div>
+
+    <script>
+        // Questão 03 - Lógica JavaScript para alternar conteúdo
+        let faseAtual = 1;
+
+        function alternarGrupos() {
+            const g1 = document.getElementById('grupo-1');
+            const g2 = document.getElementById('grupo-2');
+            const g3 = document.getElementById('grupo-3');
+
+            if (faseAtual === 1) {
+                // Mudar para Grupos D, E, F
+                g1.innerHTML = `<h2>Grupo D</h2><h3>Seleções</h3><ul><li>Estados Unidos</li><li>Paraguai</li><li>Austrália</li><li>Turquia</li></ul><details><summary>Saiba Mais</summary><p>Os EUA jogam em casa. Austrália enfrenta frequentemente seleções sul-americanas.</p></details>`;
+                
+                g2.innerHTML = `<h2>Grupo E</h2><h3>Seleções</h3><ul><li>Alemanha</li><li>Equador</li><li>Costa do Marfim</li><li>Curaçao</li></ul><details><summary>Saiba Mais</summary><p>Alemanha costuma dominar fases de grupos. Equador e Costa do Marfim têm estilos físicos semelhantes.</p></details>`;
+                
+                g3.innerHTML = `<h2>Grupo F</h2><h3>Seleções</h3><ul><li>Holanda</li><li>Japão</li><li>Tunísia</li><li>Suécia</li></ul><details><summary>Saiba Mais</summary><p>Holanda e Suécia são fortes candidatas europeias. Japão busca manter a tradição de surpresas.</p></details>`;
+                
+                faseAtual = 2;
+            } else {
+                // Voltar para Grupos A, B, C (Recarrega a página ou insere manualmente)
+                location.reload(); 
+            }
+        }
+    </script>
+</body>
+</html>
