@@ -1,0 +1,71 @@
+/* Estilização para a Questão 02 */
+body {
+    background: #f0f2f5; /* Background suave solicitado */
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+header {
+    background-color: #1a2a6c;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+nav {
+    margin-top: 10px;
+}
+nav a {
+    color: #00d2ff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+}
+nav a:hover {
+    color: white;
+}
+.secao-info {
+    background-color: #ffffff; /* Cor de fundo suave para cada secção */
+    margin: 20px auto;
+    padding: 25px;
+    width: 80%;
+    border-radius: 12px; /* Propriedade border-radius solicitada */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+h2 {
+    color: #1a2a6c;
+    font-size: 1.8em; /* Alteração de tamanho de fonte solicitada */
+    font-weight: 700; /* Propriedade font-weight solicitada */
+    border-bottom: 2px solid #00d2ff;
+    padding-bottom: 10px;
+    text-align: left; /* Propriedade text-align solicitada */
+}
+p {
+    font-size: 1.1em;
+    line-height: 1.6;
+    text-align: justify;
+}
+#btnTabela {
+    background-color: #1a2a6c;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1em;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#btnTabela:hover {
+    background-color: #b21f1f;
+}
+footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 0.9em;
+    color: #666;
+}
+/* Espaçamento mínimo solicitado */
+.secao-info + .secao-info {
+    margin-top: 30px;
+}
