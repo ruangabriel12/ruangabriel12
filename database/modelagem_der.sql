@@ -1,0 +1,73 @@
+-- =====================================================================
+-- FoodLink - Modelagem DER (documentação do modelo relacional)
+-- Este arquivo descreve, em DDL comentada, o modelo entidade-relacionamento
+-- equivalente ao Diagrama de Classes (docs/Diagrama_Classe_FOODLINK.png).
+-- =====================================================================
+--
+--  USUARIO (abstrata)                 ENDERECO
+--  ------------------------           --------------------------
+--  PK id                              PK id
+--     tipo (discriminador)               rua
+--     nome                               cidade
+--     email (UQ)                         cep
+--     documento (UQ)                     latitude
+--     senha_hash                         longitude
+--     data_cadastro
+--     limite_reservas_ativas
+--        |
+--        | 1:N  (doador_id)               1:1 (endereco_id)
+--        v                                    v
+--  OFERTA_DOACAO  <---------------------------+
+--  ------------------------------------
+--  PK id | FK doador_id | FK endereco_id
+--     alimento | quantidade | peso | data_validade
+--     observacoes | status
+--        |
+--        | 1:0..1 (oferta_id)
+--        v
+--  RESERVA  <---- FK receptor_id (USUARIO 1:N)
+--  ------------------------------------
+--  PK id | FK oferta_id | FK receptor_id
+--     data_reserva | status
+--        |
+--        | 1:0..1 (reserva_id)
+--        v
+--  RETIRADA  <---- FK voluntario_id (USUARIO 1:N)
+--  ------------------------------------
+--  PK id | FK reserva_id (UQ) | FK voluntario_id
+--     data_coleta | data_entrega | status
+--
+--  INDICADOR_IMPACTO
+--  ------------------------------------
+--  PK id | FK oferta_id (UQ)
+--     peso_total_kg | co2_evitado_kg | data_calculo
+--
+-- ---------------------------------------------------------------------
+-- Correspondência diagrama de classes -> tabelas
+-- ---------------------------------------------------------------------
+--  Usuario (abstrata)        -> tabela usuario (tipo = discriminador)
+--  Doador/Receptor/Voluntario-> mesma tabela, distinguidos por "tipo"
+--  Endereco                  -> tabela endereco
+--  OfertaDoacao              -> tabela oferta_doacao
+--  Reserva                   -> tabela reserva
+--  Retirada                  -> tabela retirada
+--  IndicadorImpacto          -> tabela indicador_impacto
+--  StatusOferta/Reserva/Retirada -> colunas VARCHAR + CHECK
+--  Composição Doador 1:N OfertaDoacao -> FK oferta_doacao.doador_id
+--  Associação OfertaDoacao 1:1 Endereco -> FK oferta_doacao.endereco_id
+--  OfertaDoacao 1:0..1 Reserva -> FK reserva.oferta_id (+ regra RN03)
+--  Reserva 1:0..1 Retirada -> FK retirada.reserva_id UNIQUE
+--  Voluntario 1:N Retirada -> FK retirada.voluntario_id
+--  OfertaDoacao 1:1 IndicadorImpacto -> FK indicador_impacto.oferta_id UNIQUE
+--
+-- ---------------------------------------------------------------------
+-- Recurso geoespacial (opcional, quando o PostGIS estiver instalado)
+-- ---------------------------------------------------------------------
+-- CREATE EXTENSION IF NOT EXISTS postgis;
+-- ALTER TABLE endereco ADD COLUMN geog GEOGRAPHY(POINT, 4326);
+-- UPDATE endereco SET geog = ST_MakePoint(longitude, latitude)::geography;
+-- CREATE INDEX idx_endereco_geog ON endereco USING GIST (geog);
+-- -- Busca por raio equivalente à implementada em Java/SQL (Haversine):
+-- SELECT o.* FROM oferta_doacao o JOIN endereco e ON e.id = o.endereco_id
+--  WHERE o.status = 'DISPONIVEL'
+--    AND ST_DWithin(e.geog, ST_MakePoint(:lon, :lat)::geography, :raio_metros);
